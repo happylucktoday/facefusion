@@ -139,7 +139,7 @@ ExecutionDeviceProduct = TypedDict('ExecutionDeviceProduct',
 	'vendor' : str,
 	'name' : str
 })
-ExecutionDeviceVideoMemory = TypedDict('ExecutionDeviceVideoMemory',
+ExecutionDeviceMemory = TypedDict('ExecutionDeviceMemory',
 {
 	'total' : ValueAndUnit,
 	'free' : ValueAndUnit
@@ -154,7 +154,7 @@ ExecutionDevice = TypedDict('ExecutionDevice',
 	'driver_version' : str,
 	'framework' : ExecutionDeviceFramework,
 	'product' : ExecutionDeviceProduct,
-	'video_memory' : ExecutionDeviceVideoMemory,
+	'memory' : ExecutionDeviceMemory,
 	'utilization' : ExecutionDeviceUtilization
 })
 

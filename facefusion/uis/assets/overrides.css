@@ -122,3 +122,8 @@
 {
 	border: unset;
 }
+
+:root:root:root:root .progress-indicator
+{
+	width: 100%;
+}

@@ -2,6 +2,7 @@
 {
 	max-width: 110em;
 	overflow: unset;
+	padding-bottom: 2.5rem;
 }
 
 :root:root:root:root input[type="number"]
@@ -125,5 +126,27 @@
 
 :root:root:root:root .progress-indicator
 {
-	width: 100%;
+	background: var(--block-background-fill);
+	height: 0.5rem;
+	left: 0;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	z-index: 1000;
+}
+
+:root:root:root:root ::-moz-progress-bar
+{
+	background: var(--button-primary-background-fill);
+}
+
+:root:root:root:root ::-webkit-progress-bar,
+:root:root:root:root ::-webkit-progress-value
+{
+	background: var(--button-primary-background-fill);
+}
+
+:root:root:root:root .pending
+{
+	all: unset;
 }

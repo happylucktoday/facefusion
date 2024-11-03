@@ -9,13 +9,12 @@ def pre_check() -> bool:
 
 
 def render() -> gradio.Blocks:
+	indicator.render()
 	with gradio.Blocks() as layout:
 		with gradio.Row():
 			with gradio.Column(scale = 4):
 				with gradio.Blocks():
 					about.render()
-				with gradio.Blocks():
-					indicator.render()
 				with gradio.Blocks():
 					processors.render()
 				with gradio.Blocks():

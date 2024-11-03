@@ -9,7 +9,6 @@ def pre_check() -> bool:
 
 
 def render() -> gradio.Blocks:
-	indicator.render()
 	with gradio.Blocks() as layout:
 		with gradio.Row():
 			with gradio.Column(scale = 4):
@@ -74,6 +73,7 @@ def render() -> gradio.Blocks:
 					face_landmarker.render()
 				with gradio.Blocks():
 					common_options.render()
+		indicator.render()
 	return layout
 
 

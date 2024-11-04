@@ -26,6 +26,7 @@ def before_each() -> None:
 
 
 def test_job_run() -> None:
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-run', 'test-job-run', '-j', get_test_jobs_directory() ]
 
 	assert subprocess.run(commands).returncode == 1
@@ -44,6 +45,26 @@ def test_job_run() -> None:
 	subprocess.run(commands)
 
 	commands = [ sys.executable, 'facefusion.py', 'job-run', 'test-job-run', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-run', 'test-job-run', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-run', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-run', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.jpg'), '-o', get_test_output_file('test-job-run.jpg') ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-run', 'test-job-run', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-submit', 'test-job-run', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-run', 'test-job-run', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 0
 	assert subprocess.run(commands).returncode == 1
@@ -51,6 +72,7 @@ def test_job_run() -> None:
 
 
 def test_job_run_all() -> None:
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-run-all', '-j', get_test_jobs_directory() ]
 
 	assert subprocess.run(commands).returncode == 1
@@ -78,6 +100,35 @@ def test_job_run_all() -> None:
 	subprocess.run(commands)
 
 	commands = [ sys.executable, 'facefusion.py', 'job-run-all', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-run-all', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-run-all-1', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-run-all-2', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-run-all-1', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.jpg'), '-o', get_test_output_file('test-job-run-all-1.jpg') ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-run-all-2', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.mp4'), '-o', get_test_output_file('test-job-run-all-2.mp4'), '--trim-frame-end', '1' ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-run-all-2', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.mp4'), '-o', get_test_output_file('test-job-run-all-2.mp4'), '--trim-frame-start', '0', '--trim-frame-end', '1' ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-run-all', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-submit-all', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-run-all', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 0
 	assert subprocess.run(commands).returncode == 1
@@ -86,6 +137,7 @@ def test_job_run_all() -> None:
 
 
 def test_job_retry() -> None:
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '-j', get_test_jobs_directory() ]
 
 	assert subprocess.run(commands).returncode == 1
@@ -97,13 +149,30 @@ def test_job_retry() -> None:
 	subprocess.run(commands)
 
 	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-retry', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-retry', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.jpg'), '-o', get_test_output_file('test-job-retry.jpg') ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 1
 
 	set_steps_status('test-job-retry', 'failed')
 	move_job_file('test-job-retry', 'failed')
 
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-retry', 'test-job-retry', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 0
 	assert subprocess.run(commands).returncode == 1
@@ -111,6 +180,7 @@ def test_job_retry() -> None:
 
 
 def test_job_retry_all() -> None:
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '-j', get_test_jobs_directory() ]
 
 	assert subprocess.run(commands).returncode == 1
@@ -131,6 +201,28 @@ def test_job_retry_all() -> None:
 	subprocess.run(commands)
 
 	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '--jobs-path', get_test_jobs_directory() ]
+
+	assert subprocess.run(commands).returncode == 1
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-retry-all-1', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-create', 'test-job-retry-all-2', '--jobs-path', get_test_jobs_directory() ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-retry-all-1', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.jpg'), '-o', get_test_output_file('test-job-retry-all-1.jpg') ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-retry-all-2', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.mp4'), '-o', get_test_output_file('test-job-retry-all-2.mp4'), '--trim-frame-end', '1' ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-add-step', 'test-job-retry-all-2', '--jobs-path', get_test_jobs_directory(), '--processors', 'face_debugger', '-t', get_test_example_file('target-240p.mp4'), '-o', get_test_output_file('test-job-retry-all-2.mp4'), '--trim-frame-start', '0', '--trim-frame-end', '1' ]
+	subprocess.run(commands)
+
+	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 1
 
@@ -139,7 +231,11 @@ def test_job_retry_all() -> None:
 	move_job_file('test-job-retry-all-1', 'failed')
 	move_job_file('test-job-retry-all-2', 'failed')
 
+<<<<<<< HEAD
 	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '-j', get_test_jobs_directory() ]
+=======
+	commands = [ sys.executable, 'facefusion.py', 'job-retry-all', '--jobs-path', get_test_jobs_directory() ]
+>>>>>>> upstream/feat/ui-indicator
 
 	assert subprocess.run(commands).returncode == 0
 	assert subprocess.run(commands).returncode == 1

@@ -1,13 +1,24 @@
+<<<<<<< HEAD
+=======
+import tempfile
+>>>>>>> upstream/feat/ui-indicator
 from argparse import ArgumentParser, HelpFormatter
 
 import facefusion.choices
 from facefusion import config, metadata, state_manager, wording
+<<<<<<< HEAD
 from facefusion.common_helper import create_float_metavar, create_int_metavar
+=======
+from facefusion.common_helper import create_float_metavar, create_int_metavar, get_last
+>>>>>>> upstream/feat/ui-indicator
 from facefusion.execution import get_execution_provider_choices
 from facefusion.filesystem import list_directory
 from facefusion.jobs import job_store
 from facefusion.processors.core import get_processors_modules
+<<<<<<< HEAD
 from facefusion.program_helper import remove_args, suggest_face_detector_choices
+=======
+>>>>>>> upstream/feat/ui-indicator
 
 
 def create_help_formatter_small(prog : str) -> HelpFormatter:
@@ -18,23 +29,47 @@ def create_help_formatter_large(prog : str) -> HelpFormatter:
 	return HelpFormatter(prog, max_help_position = 300)
 
 
+<<<<<<< HEAD
 def create_config_program() -> ArgumentParser:
 	program = ArgumentParser(add_help = False)
 	group_paths = program.add_argument_group('paths')
 	group_paths.add_argument('-c', '--config-path', help = wording.get('help.config_path'), default = 'facefusion.ini')
 	job_store.register_job_keys([ 'config-path' ])
+=======
+def create_config_path_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('--config-path', help = wording.get('help.config_path'), default = 'facefusion.ini')
+	job_store.register_job_keys([ 'config_path' ])
+>>>>>>> upstream/feat/ui-indicator
 	apply_config_path(program)
+	return program
+
+
+<<<<<<< HEAD
+def create_jobs_path_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('-j', '--jobs-path', help = wording.get('help.jobs_path'), default = config.get_str_value('paths.jobs_path', '.jobs'))
+=======
+def create_temp_path_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('--temp-path', help = wording.get('help.temp_path'), default = config.get_str_value('paths.temp_path', tempfile.gettempdir()))
+	job_store.register_job_keys([ 'temp_path' ])
 	return program
 
 
 def create_jobs_path_program() -> ArgumentParser:
 	program = ArgumentParser(add_help = False)
 	group_paths = program.add_argument_group('paths')
-	group_paths.add_argument('-j', '--jobs-path', help = wording.get('help.jobs_path'), default = config.get_str_value('paths.jobs_path', '.jobs'))
+	group_paths.add_argument('--jobs-path', help = wording.get('help.jobs_path'), default = config.get_str_value('paths.jobs_path', '.jobs'))
+>>>>>>> upstream/feat/ui-indicator
 	job_store.register_job_keys([ 'jobs_path' ])
 	return program
 
 
+<<<<<<< HEAD
 def create_paths_program() -> ArgumentParser:
 	program = ArgumentParser(add_help = False)
 	group_paths = program.add_argument_group('paths')
@@ -42,6 +77,29 @@ def create_paths_program() -> ArgumentParser:
 	group_paths.add_argument('-t', '--target-path', help = wording.get('help.target_path'), default = config.get_str_value('paths.target_path'))
 	group_paths.add_argument('-o', '--output-path', help = wording.get('help.output_path'), default = config.get_str_value('paths.output_path'))
 	job_store.register_step_keys([ 'source_paths', 'target_path', 'output_path' ])
+=======
+def create_source_paths_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('-s', '--source-paths', help = wording.get('help.source_paths'), action = 'append', default = config.get_str_list('paths.source_paths'))
+	job_store.register_step_keys([ 'source_paths' ])
+	return program
+
+
+def create_target_path_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('-t', '--target-path', help = wording.get('help.target_path'), default = config.get_str_value('paths.target_path'))
+	job_store.register_step_keys([ 'target_path' ])
+	return program
+
+
+def create_output_path_program() -> ArgumentParser:
+	program = ArgumentParser(add_help = False)
+	group_paths = program.add_argument_group('paths')
+	group_paths.add_argument('-o', '--output-path', help = wording.get('help.output_path'), default = config.get_str_value('paths.output_path'))
+	job_store.register_step_keys([ 'output_path' ])
+>>>>>>> upstream/feat/ui-indicator
 	return program
 
 
@@ -49,7 +107,13 @@ def create_face_detector_program() -> ArgumentParser:
 	program = ArgumentParser(add_help = False)
 	group_face_detector = program.add_argument_group('face detector')
 	group_face_detector.add_argument('--face-detector-model', help = wording.get('help.face_detector_model'), default = config.get_str_value('face_detector.face_detector_model', 'yoloface'), choices = facefusion.choices.face_detector_set.keys())
+<<<<<<< HEAD
 	group_face_detector.add_argument('--face-detector-size', help = wording.get('help.face_detector_size'), default = config.get_str_value('face_detector.face_detector_size', '640x640'), choices = suggest_face_detector_choices(program))
+=======
+	known_args, _ = program.parse_known_args()
+	face_detector_size_choices = facefusion.choices.face_detector_set.get(known_args.face_detector_model)
+	group_face_detector.add_argument('--face-detector-size', help = wording.get('help.face_detector_size'), default = config.get_str_value('face_detector.face_detector_size', get_last(face_detector_size_choices)), choices = face_detector_size_choices)
+>>>>>>> upstream/feat/ui-indicator
 	group_face_detector.add_argument('--face-detector-angles', help = wording.get('help.face_detector_angles'), type = int, default = config.get_int_list('face_detector.face_detector_angles', '0'), choices = facefusion.choices.face_detector_angles, nargs = '+', metavar = 'FACE_DETECTOR_ANGLES')
 	group_face_detector.add_argument('--face-detector-score', help = wording.get('help.face_detector_score'), type = float, default = config.get_float_value('face_detector.face_detector_score', '0.5'), choices = facefusion.choices.face_detector_score_range, metavar = create_float_metavar(facefusion.choices.face_detector_score_range))
 	job_store.register_step_keys([ 'face_detector_model', 'face_detector_angles', 'face_detector_size', 'face_detector_score' ])
@@ -197,7 +261,11 @@ def create_step_index_program() -> ArgumentParser:
 
 
 def collect_step_program() -> ArgumentParser:
+<<<<<<< HEAD
 	return ArgumentParser(parents= [ create_config_program(), create_jobs_path_program(), create_paths_program(), create_face_detector_program(), create_face_landmarker_program(), create_face_selector_program(), create_face_masker_program(), create_frame_extraction_program(), create_output_creation_program(), create_processors_program() ], add_help = False)
+=======
+	return ArgumentParser(parents= [ create_face_detector_program(), create_face_landmarker_program(), create_face_selector_program(), create_face_masker_program(), create_frame_extraction_program(), create_output_creation_program(), create_processors_program() ], add_help = False)
+>>>>>>> upstream/feat/ui-indicator
 
 
 def collect_job_program() -> ArgumentParser:
@@ -210,8 +278,13 @@ def create_program() -> ArgumentParser:
 	program.add_argument('-v', '--version', version = metadata.get('name') + ' ' + metadata.get('version'), action = 'version')
 	sub_program = program.add_subparsers(dest = 'command')
 	# general
+<<<<<<< HEAD
 	sub_program.add_parser('run', help = wording.get('help.run'), parents = [ collect_step_program(), create_uis_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('headless-run', help = wording.get('help.headless_run'), parents = [ collect_step_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+=======
+	sub_program.add_parser('run', help = wording.get('help.run'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), create_source_paths_program(), create_target_path_program(), create_output_path_program(), collect_step_program(), create_uis_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('headless-run', help = wording.get('help.headless_run'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), create_source_paths_program(), create_target_path_program(), create_output_path_program(), collect_step_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+>>>>>>> upstream/feat/ui-indicator
 	sub_program.add_parser('force-download', help = wording.get('help.force_download'), parents = [ create_log_level_program() ], formatter_class = create_help_formatter_large)
 	# job manager
 	sub_program.add_parser('job-list', help = wording.get('help.job_list'), parents = [ create_job_status_program(), create_jobs_path_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
@@ -220,6 +293,7 @@ def create_program() -> ArgumentParser:
 	sub_program.add_parser('job-submit-all', help = wording.get('help.job_submit_all'), parents = [ create_jobs_path_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-delete', help = wording.get('help.job_delete'), parents = [ create_job_id_program(), create_jobs_path_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-delete-all', help = wording.get('help.job_delete_all'), parents = [ create_jobs_path_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
+<<<<<<< HEAD
 	sub_program.add_parser('job-add-step', help = wording.get('help.job_add_step'), parents = [ create_job_id_program(), collect_step_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-remix-step', help = wording.get('help.job_remix_step'), parents = [ create_job_id_program(), create_step_index_program(), remove_args(collect_step_program(), [ 'target_path' ]), create_log_level_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-insert-step', help = wording.get('help.job_insert_step'), parents = [ create_job_id_program(), create_step_index_program(), collect_step_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
@@ -229,6 +303,17 @@ def create_program() -> ArgumentParser:
 	sub_program.add_parser('job-run-all', help = wording.get('help.job_run_all'), parents = [ create_config_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-retry', help = wording.get('help.job_retry'), parents = [ create_job_id_program(), create_config_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
 	sub_program.add_parser('job-retry-all', help = wording.get('help.job_retry_all'), parents = [ create_config_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+=======
+	sub_program.add_parser('job-add-step', help = wording.get('help.job_add_step'), parents = [ create_job_id_program(), create_config_path_program(), create_jobs_path_program(), create_source_paths_program(), create_target_path_program(), create_output_path_program(), collect_step_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-remix-step', help = wording.get('help.job_remix_step'), parents = [ create_job_id_program(), create_step_index_program(), create_config_path_program(), create_jobs_path_program(), create_source_paths_program(), create_output_path_program(), collect_step_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-insert-step', help = wording.get('help.job_insert_step'), parents = [ create_job_id_program(), create_step_index_program(), create_config_path_program(), create_jobs_path_program(), create_source_paths_program(), create_target_path_program(), create_output_path_program(), collect_step_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-remove-step', help = wording.get('help.job_remove_step'), parents = [ create_job_id_program(), create_step_index_program(), create_jobs_path_program(), create_log_level_program() ], formatter_class = create_help_formatter_large)
+	# job runner
+	sub_program.add_parser('job-run', help = wording.get('help.job_run'), parents = [ create_job_id_program(), create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-run-all', help = wording.get('help.job_run_all'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-retry', help = wording.get('help.job_retry'), parents = [ create_job_id_program(), create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+	sub_program.add_parser('job-retry-all', help = wording.get('help.job_retry_all'), parents = [ create_config_path_program(), create_temp_path_program(), create_jobs_path_program(), collect_job_program() ], formatter_class = create_help_formatter_large)
+>>>>>>> upstream/feat/ui-indicator
 	return ArgumentParser(parents = [ program ], formatter_class = create_help_formatter_small, add_help = True)
 
 

@@ -17,11 +17,19 @@ from facefusion.filesystem import in_directory, same_file_extension
 from facefusion.processors import choices as processors_choices
 from facefusion.processors.typing import FaceDebuggerInputs
 from facefusion.program_helper import find_argument_group
+<<<<<<< HEAD
 from facefusion.typing import ApplyStateItem, Args, Face, ProcessMode, QueuePayload, UpdateProgress, VisionFrame
 from facefusion.vision import read_image, read_static_image, write_image
 
 
 def get_inference_pool() -> None:
+=======
+from facefusion.typing import ApplyStateItem, Args, Face, InferencePool, ProcessMode, QueuePayload, UpdateProgress, VisionFrame
+from facefusion.vision import read_image, read_static_image, write_image
+
+
+def get_inference_pool() -> InferencePool:
+>>>>>>> upstream/feat/ui-indicator
 	pass
 
 

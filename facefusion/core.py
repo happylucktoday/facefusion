@@ -41,6 +41,8 @@ def cli() -> None:
 			route(args)
 		else:
 			program.print_help()
+	else:
+		hard_exit(2)
 
 
 def route(args : Args) -> None:
@@ -65,6 +67,7 @@ def route(args : Args) -> None:
 		for ui_layout in ui.get_ui_layouts_modules(state_manager.get_item('ui_layouts')):
 			if not ui_layout.pre_check():
 				return conditional_exit(2)
+		ui.init()
 		ui.launch()
 	if state_manager.get_item('command') == 'headless-run':
 		if not job_manager.init_jobs(state_manager.get_item('jobs_path')):
@@ -79,8 +82,8 @@ def route(args : Args) -> None:
 
 
 def pre_check() -> bool:
-	if sys.version_info < (3, 9):
-		logger.error(wording.get('python_not_supported').format(version = '3.9'), __name__)
+	if sys.version_info < (3, 10):
+		logger.error(wording.get('python_not_supported').format(version = '3.10'), __name__)
 		return False
 	if not shutil.which('curl'):
 		logger.error(wording.get('curl_not_installed'), __name__)

@@ -20,7 +20,11 @@ from facefusion.inference_manager import get_static_model_initializer
 from facefusion.processors import choices as processors_choices
 from facefusion.processors.pixel_boost import explode_pixel_boost, implode_pixel_boost
 from facefusion.processors.typing import FaceSwapperInputs
+<<<<<<< HEAD
 from facefusion.program_helper import find_argument_group, suggest_face_swapper_pixel_boost_choices
+=======
+from facefusion.program_helper import find_argument_group
+>>>>>>> upstream/feat/ui-indicator
 from facefusion.thread_helper import conditional_thread_semaphore
 from facefusion.typing import ApplyStateItem, Args, Embedding, Face, InferencePool, ModelOptions, ModelSet, ProcessMode, QueuePayload, UpdateProgress, VisionFrame
 from facefusion.vision import read_image, read_static_image, read_static_images, unpack_resolution, write_image
@@ -153,6 +157,43 @@ MODEL_SET : ModelSet =\
 		'mean': [ 0.5, 0.5, 0.5 ],
 		'standard_deviation': [ 0.5, 0.5, 0.5 ]
 	},
+<<<<<<< HEAD
+=======
+	'hififace_unofficial_256':
+	{
+		'hashes':
+		{
+			'face_swapper':
+			{
+				'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models-3.1.0/hififace_unofficial_256.hash',
+				'path': resolve_relative_path('../.assets/models/hififace_unofficial_256.hash')
+			},
+			'embedding_converter':
+			{
+				'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models-3.1.0/arcface_converter_hififace.hash',
+				'path': resolve_relative_path('../.assets/models/arcface_converter_hififace.hash')
+			}
+		},
+		'sources':
+		{
+			'face_swapper':
+			{
+				'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models-3.1.0/hififace_unofficial_256.onnx',
+				'path': resolve_relative_path('../.assets/models/hififace_unofficial_256.onnx')
+			},
+			'embedding_converter':
+			{
+				'url': 'https://github.com/facefusion/facefusion-assets/releases/download/models-3.1.0/arcface_converter_hififace.onnx',
+				'path': resolve_relative_path('../.assets/models/arcface_converter_hififace.onnx')
+			}
+		},
+		'type': 'hififace',
+		'template': 'mtcnn_512',
+		'size': (256, 256),
+		'mean': [ 0.5, 0.5, 0.5 ],
+		'standard_deviation': [ 0.5, 0.5, 0.5 ]
+	},
+>>>>>>> upstream/feat/ui-indicator
 	'inswapper_128':
 	{
 		'hashes':
@@ -317,7 +358,12 @@ def register_args(program : ArgumentParser) -> None:
 	group_processors = find_argument_group(program, 'processors')
 	if group_processors:
 		group_processors.add_argument('--face-swapper-model', help = wording.get('help.face_swapper_model'), default = config.get_str_value('processors.face_swapper_model', 'inswapper_128_fp16'), choices = processors_choices.face_swapper_set.keys())
+<<<<<<< HEAD
 		face_swapper_pixel_boost_choices = suggest_face_swapper_pixel_boost_choices(program)
+=======
+		known_args, _ = program.parse_known_args()
+		face_swapper_pixel_boost_choices = processors_choices.face_swapper_set.get(known_args.face_swapper_model)
+>>>>>>> upstream/feat/ui-indicator
 		group_processors.add_argument('--face-swapper-pixel-boost', help = wording.get('help.face_swapper_pixel_boost'), default = config.get_str_value('processors.face_swapper_pixel_boost', get_first(face_swapper_pixel_boost_choices)), choices = face_swapper_pixel_boost_choices)
 		facefusion.jobs.job_store.register_step_keys([ 'face_swapper_model', 'face_swapper_pixel_boost' ])
 
@@ -412,7 +458,11 @@ def forward_swap_face(source_face : Face, crop_vision_frame : VisionFrame) -> Vi
 
 	for face_swapper_input in face_swapper.get_inputs():
 		if face_swapper_input.name == 'source':
+<<<<<<< HEAD
 			if model_type == 'blendswap' or model_type == 'uniface':
+=======
+			if model_type in [ 'blendswap', 'uniface' ]:
+>>>>>>> upstream/feat/ui-indicator
 				face_swapper_inputs[face_swapper_input.name] = prepare_source_frame(source_face)
 			else:
 				face_swapper_inputs[face_swapper_input.name] = prepare_source_embedding(source_face)
@@ -493,7 +543,11 @@ def normalize_crop_frame(crop_vision_frame : VisionFrame) -> VisionFrame:
 	model_standard_deviation = get_model_options().get('standard_deviation')
 
 	crop_vision_frame = crop_vision_frame.transpose(1, 2, 0)
+<<<<<<< HEAD
 	if model_type == 'ghost' or model_type == 'uniface':
+=======
+	if model_type in [ 'ghost', 'hififace', 'uniface' ]:
+>>>>>>> upstream/feat/ui-indicator
 		crop_vision_frame = crop_vision_frame * model_standard_deviation + model_mean
 	crop_vision_frame = crop_vision_frame.clip(0, 1)
 	crop_vision_frame = crop_vision_frame[:, :, ::-1] * 255

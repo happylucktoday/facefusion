@@ -12,6 +12,10 @@ WORDING : Dict[str, Any] =\
 	'extracting_frames_failed': 'Extracting frames failed',
 	'analysing': 'Analysing',
 	'processing': 'Processing',
+<<<<<<< HEAD
+=======
+	'streaming': 'Streaming',
+>>>>>>> upstream/feat/ui-indicator
 	'downloading': 'Downloading',
 	'temp_frames_not_found': 'Temporary frames not found',
 	'copying_image': 'Copying image with a resolution of {resolution}',
@@ -46,6 +50,10 @@ WORDING : Dict[str, Any] =\
 	'ui_layout_not_loaded': 'UI layout {ui_layout} could not be loaded',
 	'ui_layout_not_implemented': 'UI layout {ui_layout} not implemented correctly',
 	'stream_not_loaded': 'Stream {stream_mode} could not be loaded',
+<<<<<<< HEAD
+=======
+	'stream_not_supported': 'Stream not supported',
+>>>>>>> upstream/feat/ui-indicator
 	'job_created': 'Job {job_id} created',
 	'job_not_created': 'Job {job_id} not created',
 	'job_submitted': 'Job {job_id} submitted',
@@ -94,6 +102,10 @@ WORDING : Dict[str, Any] =\
 		'skip_conda': 'skip the conda environment check',
 		# paths
 		'config_path': 'choose the config file to override defaults',
+<<<<<<< HEAD
+=======
+		'temp_path': 'specify the directory for the temporary resources',
+>>>>>>> upstream/feat/ui-indicator
 		'jobs_path': 'specify the directory to store jobs',
 		'source_paths': 'choose single or multiple source images or audios',
 		'target_path': 'choose single target image or video',

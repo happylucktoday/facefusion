@@ -1,8 +1,12 @@
 from argparse import ArgumentParser, _ArgumentGroup, _SubParsersAction
+<<<<<<< HEAD
 from typing import List, Optional
 
 import facefusion.choices
 from facefusion.processors import choices as processors_choices
+=======
+from typing import Optional
+>>>>>>> upstream/feat/ui-indicator
 
 
 def find_argument_group(program : ArgumentParser, group_name : str) -> Optional[_ArgumentGroup]:
@@ -32,6 +36,7 @@ def validate_actions(program : ArgumentParser) -> bool:
 			elif action.default not in action.choices:
 				return False
 	return True
+<<<<<<< HEAD
 
 
 def remove_args(program : ArgumentParser, remove_names : List[str]) -> ArgumentParser:
@@ -50,3 +55,5 @@ def suggest_face_detector_choices(program : ArgumentParser) -> List[str]:
 def suggest_face_swapper_pixel_boost_choices(program : ArgumentParser) -> List[str]:
 	known_args, _ = program.parse_known_args()
 	return processors_choices.face_swapper_set.get(known_args.face_swapper_model) #type:ignore[call-overload]
+=======
+>>>>>>> upstream/feat/ui-indicator

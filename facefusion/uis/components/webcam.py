@@ -43,7 +43,11 @@ def get_webcam_capture() -> Optional[cv2.VideoCapture]:
 def clear_webcam_capture() -> None:
 	global WEBCAM_CAPTURE
 
+<<<<<<< HEAD
 	if WEBCAM_CAPTURE:
+=======
+	if WEBCAM_CAPTURE and WEBCAM_CAPTURE.isOpened():
+>>>>>>> upstream/feat/ui-indicator
 		WEBCAM_CAPTURE.release()
 	WEBCAM_CAPTURE = None
 
@@ -89,11 +93,19 @@ def start(webcam_mode : WebcamMode, webcam_resolution : str, webcam_fps : Fps) -
 		stream = open_stream(webcam_mode, webcam_resolution, webcam_fps) #type:ignore[arg-type]
 	webcam_width, webcam_height = unpack_resolution(webcam_resolution)
 	webcam_capture = get_webcam_capture()
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/feat/ui-indicator
 	if webcam_capture and webcam_capture.isOpened():
 		webcam_capture.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG')) #type:ignore[attr-defined]
 		webcam_capture.set(cv2.CAP_PROP_FRAME_WIDTH, webcam_width)
 		webcam_capture.set(cv2.CAP_PROP_FRAME_HEIGHT, webcam_height)
 		webcam_capture.set(cv2.CAP_PROP_FPS, webcam_fps)
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/feat/ui-indicator
 		for capture_frame in multi_process_capture(source_face, webcam_capture, webcam_fps):
 			if webcam_mode == 'inline':
 				yield normalize_frame_color(capture_frame)
@@ -107,19 +119,28 @@ def start(webcam_mode : WebcamMode, webcam_resolution : str, webcam_fps : Fps) -
 
 def multi_process_capture(source_face : Face, webcam_capture : cv2.VideoCapture, webcam_fps : Fps) -> Generator[VisionFrame, None, None]:
 	deque_capture_frames: Deque[VisionFrame] = deque()
+<<<<<<< HEAD
 	with tqdm(desc = wording.get('processing'), unit = 'frame', ascii = ' =', disable = state_manager.get_item('log_level') in [ 'warn', 'error' ]) as progress:
 		progress.set_postfix(
 		{
 			'execution_providers': state_manager.get_item('execution_providers'),
 			'execution_thread_count': state_manager.get_item('execution_thread_count')
 		})
+=======
+
+	with tqdm(desc = wording.get('streaming'), unit = 'frame', disable = state_manager.get_item('log_level') in [ 'warn', 'error' ]) as progress:
+>>>>>>> upstream/feat/ui-indicator
 		with ThreadPoolExecutor(max_workers = state_manager.get_item('execution_thread_count')) as executor:
 			futures = []
 
 			while webcam_capture and webcam_capture.isOpened():
 				_, capture_frame = webcam_capture.read()
 				if analyse_stream(capture_frame, webcam_fps):
+<<<<<<< HEAD
 					return
+=======
+					yield None
+>>>>>>> upstream/feat/ui-indicator
 				future = executor.submit(process_stream_frame, source_face, capture_frame)
 				futures.append(future)
 
@@ -140,6 +161,10 @@ def stop() -> gradio.Image:
 
 def process_stream_frame(source_face : Face, target_vision_frame : VisionFrame) -> VisionFrame:
 	source_audio_frame = create_empty_audio_frame()
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/feat/ui-indicator
 	for processor_module in get_processors_modules(state_manager.get_item('processors')):
 		logger.disable()
 		if processor_module.pre_process('stream'):
@@ -155,6 +180,10 @@ def process_stream_frame(source_face : Face, target_vision_frame : VisionFrame) 
 
 def open_stream(stream_mode : StreamMode, stream_resolution : str, stream_fps : Fps) -> subprocess.Popen[bytes]:
 	commands = [ '-f', 'rawvideo', '-pix_fmt', 'bgr24', '-s', stream_resolution, '-r', str(stream_fps), '-i', '-']
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/feat/ui-indicator
 	if stream_mode == 'udp':
 		commands.extend([ '-b:v', '2000k', '-f', 'mpegts', 'udp://localhost:27000?pkt_size=1316' ])
 	if stream_mode == 'v4l2':

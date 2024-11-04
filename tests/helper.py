@@ -1,7 +1,13 @@
 import os
+<<<<<<< HEAD
 
 from facefusion.filesystem import create_directory, is_directory, is_file, remove_directory
 from facefusion.temp_helper import get_base_directory_path
+=======
+import tempfile
+
+from facefusion.filesystem import create_directory, is_directory, is_file, remove_directory
+>>>>>>> upstream/feat/ui-indicator
 from facefusion.typing import JobStatus
 
 
@@ -14,7 +20,11 @@ def get_test_job_file(file_path : str, job_status : JobStatus) -> str:
 
 
 def get_test_jobs_directory() -> str:
+<<<<<<< HEAD
 	return os.path.join(get_base_directory_path(), 'test-jobs')
+=======
+	return os.path.join(tempfile.gettempdir(), 'facefusion-test-jobs')
+>>>>>>> upstream/feat/ui-indicator
 
 
 def get_test_example_file(file_path : str) -> str:
@@ -22,7 +32,11 @@ def get_test_example_file(file_path : str) -> str:
 
 
 def get_test_examples_directory() -> str:
+<<<<<<< HEAD
 	return os.path.join(get_base_directory_path(), 'test-examples')
+=======
+	return os.path.join(tempfile.gettempdir(), 'facefusion-test-examples')
+>>>>>>> upstream/feat/ui-indicator
 
 
 def is_test_output_file(file_path : str) -> bool:
@@ -34,7 +48,11 @@ def get_test_output_file(file_path : str) -> str:
 
 
 def get_test_outputs_directory() -> str:
+<<<<<<< HEAD
 	return os.path.join(get_base_directory_path(), 'test-outputs')
+=======
+	return os.path.join(tempfile.gettempdir(), 'facefusion-test-outputs')
+>>>>>>> upstream/feat/ui-indicator
 
 
 def prepare_test_output_directory() -> bool:

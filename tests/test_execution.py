@@ -15,8 +15,12 @@ def test_multiple_execution_providers() -> None:
 	[
 		('CUDAExecutionProvider',
 		{
+<<<<<<< HEAD
 			'device_id': '1',
 			'cudnn_conv_algo_search': 'DEFAULT'
+=======
+			'device_id': '1'
+>>>>>>> upstream/feat/ui-indicator
 		}),
 		'CPUExecutionProvider'
 	]

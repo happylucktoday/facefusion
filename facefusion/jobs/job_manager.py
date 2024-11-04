@@ -20,7 +20,6 @@ def init_jobs(jobs_path : str) -> bool:
 	JOBS_PATH = jobs_path
 	job_status_paths = [ os.path.join(JOBS_PATH, job_status) for job_status in job_statuses ]
 
-	create_base_directory()
 	for job_status_path in job_status_paths:
 		create_directory(job_status_path)
 	return all(is_directory(status_path) for status_path in job_status_paths)

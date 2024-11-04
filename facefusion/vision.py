@@ -8,7 +8,11 @@ from cv2.typing import Size
 from facefusion.choices import image_template_sizes, video_template_sizes
 from facefusion.common_helper import is_windows
 from facefusion.filesystem import is_image, is_video, sanitize_path_for_windows
+<<<<<<< HEAD
 from facefusion.typing import Fps, Orientation, Resolution, VisionFrame
+=======
+from facefusion.typing import Duration, Fps, Orientation, Resolution, VisionFrame
+>>>>>>> upstream/feat/ui-indicator
 
 
 @lru_cache(maxsize = 128)
@@ -119,6 +123,17 @@ def restrict_video_fps(video_path : str, fps : Fps) -> Fps:
 	return fps
 
 
+<<<<<<< HEAD
+=======
+def detect_video_duration(video_path : str) -> Duration:
+	video_frame_total = count_video_frame_total(video_path)
+	video_fps = detect_video_fps(video_path)
+	if video_frame_total and video_fps:
+		return video_frame_total / video_fps
+	return 0
+
+
+>>>>>>> upstream/feat/ui-indicator
 def detect_video_resolution(video_path : str) -> Optional[Resolution]:
 	if is_video(video_path):
 		if is_windows():
@@ -202,6 +217,27 @@ def normalize_frame_color(vision_frame : VisionFrame) -> VisionFrame:
 	return cv2.cvtColor(vision_frame, cv2.COLOR_BGR2RGB)
 
 
+<<<<<<< HEAD
+=======
+def match_frame_color(source_vision_frame : VisionFrame, target_vision_frame : VisionFrame) -> VisionFrame:
+	color_difference_sizes = numpy.linspace(16, target_vision_frame.shape[0], 3, endpoint = False)
+
+	for color_difference_size in color_difference_sizes:
+		source_vision_frame = equalize_frame_color(source_vision_frame, target_vision_frame, normalize_resolution((color_difference_size, color_difference_size)))
+	target_vision_frame = equalize_frame_color(source_vision_frame, target_vision_frame, target_vision_frame.shape[:2][::-1])
+	return target_vision_frame
+
+
+def equalize_frame_color(source_vision_frame : VisionFrame, target_vision_frame : VisionFrame, size : Size) -> VisionFrame:
+	source_frame_resize = cv2.resize(source_vision_frame, size, interpolation = cv2.INTER_AREA).astype(numpy.float32)
+	target_frame_resize = cv2.resize(target_vision_frame, size, interpolation = cv2.INTER_AREA).astype(numpy.float32)
+	color_difference_vision_frame = numpy.subtract(source_frame_resize, target_frame_resize)
+	color_difference_vision_frame = cv2.resize(color_difference_vision_frame, target_vision_frame.shape[:2][::-1], interpolation = cv2.INTER_CUBIC)
+	target_vision_frame = numpy.add(target_vision_frame, color_difference_vision_frame).clip(0, 255).astype(numpy.uint8)
+	return target_vision_frame
+
+
+>>>>>>> upstream/feat/ui-indicator
 def create_tile_frames(vision_frame : VisionFrame, size : Size) -> Tuple[List[VisionFrame], int, int]:
 	vision_frame = numpy.pad(vision_frame, ((size[1], size[1]), (size[1], size[1]), (0, 0)))
 	tile_width = size[0] - 2 * size[2]

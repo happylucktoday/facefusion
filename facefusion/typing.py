@@ -67,6 +67,10 @@ Mel = NDArray[Any]
 MelFilterBank = NDArray[Any]
 
 Fps = float
+<<<<<<< HEAD
+=======
+Duration = float
+>>>>>>> upstream/feat/ui-indicator
 Padding = Tuple[int, int, int, int]
 Orientation = Literal['landscape', 'portrait']
 Resolution = Tuple[int, int]
@@ -84,7 +88,11 @@ ProcessStep = Callable[[str, int, Args], bool]
 
 Content = Dict[str, Any]
 
+<<<<<<< HEAD
 WarpTemplate = Literal['arcface_112_v1', 'arcface_112_v2', 'arcface_128_v2', 'ffhq_512']
+=======
+WarpTemplate = Literal['arcface_112_v1', 'arcface_112_v2', 'arcface_128_v2', 'ffhq_512', 'mtcnn_512', 'styleganex_384']
+>>>>>>> upstream/feat/ui-indicator
 WarpTemplateSet = Dict[WarpTemplate, NDArray[Any]]
 ProcessMode = Literal['output', 'preview', 'stream']
 
@@ -105,7 +113,11 @@ FaceMaskType = Literal['box', 'occlusion', 'region']
 FaceMaskRegion = Literal['skin', 'left-eyebrow', 'right-eyebrow', 'left-eye', 'right-eye', 'glasses', 'nose', 'mouth', 'upper-lip', 'lower-lip']
 TempFrameFormat = Literal['jpg', 'png', 'bmp']
 OutputAudioEncoder = Literal['aac', 'libmp3lame', 'libopus', 'libvorbis']
+<<<<<<< HEAD
 OutputVideoEncoder = Literal['libx264', 'libx265', 'libvpx-vp9', 'h264_nvenc', 'hevc_nvenc', 'h264_amf', 'hevc_amf', 'h264_videotoolbox', 'hevc_videotoolbox']
+=======
+OutputVideoEncoder = Literal['libx264', 'libx265', 'libvpx-vp9', 'h264_nvenc', 'hevc_nvenc', 'h264_amf', 'hevc_amf','h264_qsv', 'hevc_qsv', 'h264_videotoolbox', 'hevc_videotoolbox']
+>>>>>>> upstream/feat/ui-indicator
 OutputVideoPreset = Literal['ultrafast', 'superfast', 'veryfast', 'faster', 'fast', 'medium', 'slow', 'slower', 'veryslow']
 
 Download = TypedDict('Download',
@@ -138,7 +150,11 @@ ExecutionDeviceProduct = TypedDict('ExecutionDeviceProduct',
 	'vendor' : str,
 	'name' : str
 })
+<<<<<<< HEAD
 ExecutionDeviceVideoMemory = TypedDict('ExecutionDeviceVideoMemory',
+=======
+ExecutionDeviceMemory = TypedDict('ExecutionDeviceMemory',
+>>>>>>> upstream/feat/ui-indicator
 {
 	'total' : ValueAndUnit,
 	'free' : ValueAndUnit
@@ -153,7 +169,11 @@ ExecutionDevice = TypedDict('ExecutionDevice',
 	'driver_version' : str,
 	'framework' : ExecutionDeviceFramework,
 	'product' : ExecutionDeviceProduct,
+<<<<<<< HEAD
 	'video_memory' : ExecutionDeviceVideoMemory,
+=======
+	'memory' : ExecutionDeviceMemory,
+>>>>>>> upstream/feat/ui-indicator
 	'utilization' : ExecutionDeviceUtilization
 })
 
@@ -191,6 +211,10 @@ StateKey = Literal\
 [
 	'command',
 	'config_path',
+<<<<<<< HEAD
+=======
+	'temp_path',
+>>>>>>> upstream/feat/ui-indicator
 	'jobs_path',
 	'source_paths',
 	'target_path',
@@ -247,6 +271,10 @@ State = TypedDict('State',
 {
 	'command' : str,
 	'config_path' : str,
+<<<<<<< HEAD
+=======
+	'temp_path': str,
+>>>>>>> upstream/feat/ui-indicator
 	'jobs_path' : str,
 	'source_paths' : List[str],
 	'target_path' : str,

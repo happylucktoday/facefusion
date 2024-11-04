@@ -35,6 +35,7 @@ def apply_args(args : Args, apply_state_item : ApplyStateItem) -> None:
 	# general
 	apply_state_item('command', args.get('command'))
 	# paths
+	apply_state_item('temp_path', args.get('temp_path'))
 	apply_state_item('jobs_path', args.get('jobs_path'))
 	apply_state_item('source_paths', args.get('source_paths'))
 	apply_state_item('target_path', args.get('target_path'))
@@ -48,15 +49,15 @@ def apply_args(args : Args, apply_state_item : ApplyStateItem) -> None:
 	apply_state_item('face_landmarker_model', args.get('face_landmarker_model'))
 	apply_state_item('face_landmarker_score', args.get('face_landmarker_score'))
 	# face selector
-	state_manager.init_item('face_selector_mode', args.get('face_selector_mode'))
-	state_manager.init_item('face_selector_order', args.get('face_selector_order'))
-	state_manager.init_item('face_selector_age_start', args.get('face_selector_age_start'))
-	state_manager.init_item('face_selector_age_end', args.get('face_selector_age_end'))
-	state_manager.init_item('face_selector_gender', args.get('face_selector_gender'))
-	state_manager.init_item('face_selector_race', args.get('face_selector_race'))
-	state_manager.init_item('reference_face_position', args.get('reference_face_position'))
-	state_manager.init_item('reference_face_distance', args.get('reference_face_distance'))
-	state_manager.init_item('reference_frame_number', args.get('reference_frame_number'))
+	apply_state_item('face_selector_mode', args.get('face_selector_mode'))
+	apply_state_item('face_selector_order', args.get('face_selector_order'))
+	apply_state_item('face_selector_age_start', args.get('face_selector_age_start'))
+	apply_state_item('face_selector_age_end', args.get('face_selector_age_end'))
+	apply_state_item('face_selector_gender', args.get('face_selector_gender'))
+	apply_state_item('face_selector_race', args.get('face_selector_race'))
+	apply_state_item('reference_face_position', args.get('reference_face_position'))
+	apply_state_item('reference_face_distance', args.get('reference_face_distance'))
+	apply_state_item('reference_frame_number', args.get('reference_frame_number'))
 	# face masker
 	apply_state_item('face_mask_types', args.get('face_mask_types'))
 	apply_state_item('face_mask_blur', args.get('face_mask_blur'))

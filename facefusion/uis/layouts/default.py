@@ -1,7 +1,11 @@
 import gradio
 
 from facefusion import state_manager
+<<<<<<< HEAD
 from facefusion.uis.components import about, age_modifier_options, common_options, execution, execution_queue_count, execution_thread_count, execution_vram_size, expression_restorer_options, face_debugger_options, face_detector, face_editor_options, face_enhancer_options, face_landmarker, face_masker, face_selector, face_swapper_options, frame_colorizer_options, frame_enhancer_options, instant_runner, job_manager, job_runner, lip_syncer_options, memory, output, output_options, preview, processors, source, target, temp_frame, terminal, trim_frame, ui_workflow
+=======
+from facefusion.uis.components import about, age_modifier_options, common_options, execution, execution_queue_count, execution_thread_count, expression_restorer_options, face_debugger_options, face_detector, face_editor_options, face_enhancer_options, face_landmarker, face_masker, face_selector, face_swapper_options, frame_colorizer_options, frame_enhancer_options, indicator, instant_runner, job_manager, job_runner, lip_syncer_options, memory, output, output_options, preview, processors, source, target, temp_frame, terminal, trim_frame, ui_workflow
+>>>>>>> upstream/feat/ui-indicator
 
 
 def pre_check() -> bool:
@@ -38,7 +42,10 @@ def render() -> gradio.Blocks:
 					execution.render()
 					execution_thread_count.render()
 					execution_queue_count.render()
+<<<<<<< HEAD
 					execution_vram_size.render()
+=======
+>>>>>>> upstream/feat/ui-indicator
 				with gradio.Blocks():
 					memory.render()
 				with gradio.Blocks():
@@ -74,6 +81,10 @@ def render() -> gradio.Blocks:
 					face_landmarker.render()
 				with gradio.Blocks():
 					common_options.render()
+<<<<<<< HEAD
+=======
+		indicator.render()
+>>>>>>> upstream/feat/ui-indicator
 	return layout
 
 

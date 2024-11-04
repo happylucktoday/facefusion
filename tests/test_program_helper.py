@@ -2,7 +2,11 @@ from argparse import ArgumentParser
 
 import pytest
 
+<<<<<<< HEAD
 from facefusion.program_helper import find_argument_group, remove_args, validate_actions
+=======
+from facefusion.program_helper import find_argument_group, validate_actions
+>>>>>>> upstream/feat/ui-indicator
 
 
 def test_find_argument_group() -> None:
@@ -38,6 +42,7 @@ def test_validate_actions() -> None:
 			action.default = args[action.dest]
 
 	assert validate_actions(program) is False
+<<<<<<< HEAD
 
 
 def test_remove_args() -> None:
@@ -58,3 +63,5 @@ def test_remove_args() -> None:
 	assert 'test_1' not in actions
 	assert 'test_2' not in actions
 	assert 'test_3' in actions
+=======
+>>>>>>> upstream/feat/ui-indicator

@@ -15,6 +15,10 @@ def before_all() -> None:
 	[
 		'https://github.com/facefusion/facefusion-assets/releases/download/examples-3.0.0/target-240p.mp4'
 	])
+<<<<<<< HEAD
+=======
+	state_manager.init_item('temp_path', tempfile.gettempdir())
+>>>>>>> upstream/feat/ui-indicator
 	state_manager.init_item('temp_frame_format', 'png')
 
 
